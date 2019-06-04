@@ -1,6 +1,6 @@
 <!DOCTYPE html><html>
         <head>
-        <title>2019 Spring WCM 期末示範網站</title>
+        <title>CMSimfly</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900" rel="stylesheet">
@@ -136,7 +136,7 @@ init_mathjax();
                             <li><a href="./../blog/index.html">blog</a></li>
                         </ul>
                       </li>
-                     <li><a href='各組期末報告說明.html'>各組期末報告說明</a><li class='has-children'><a href='近端配置與管理.html'>近端配置與管理</a><ul class='dropdown'><li><a href='網路連線設定.html'>網路連線設定</a><li><a href='配置可攜程式環境.html'>配置可攜程式環境</a></li></ul><li><a href='倉儲改版.html'>倉儲改版</a><li class='has-children'><a href='系統開發.html'>系統開發</a><ul class='dropdown'><li><a href='程式開發要件.html'>程式開發要件</a><li class='has-children'><a href='Mobile 網站內容.html'>Mobile 網站內容</a><ul class='dropdown'><li><a href='CMSimfly 架構.html'>CMSimfly 架構</a><li><a href='bs4 應用.html'>bs4 應用</a><li><a href='套用模板一.html'>套用模板一</a></li></ul><li><a href='Virtual Host.html'>Virtual Host</a></li></ul><li class='has-children'><a href='期末報告.html'>期末報告</a><ul class='dropdown'><li><a href='Scrum2.html'>Scrum2</a><li><a href='分組 pdf 期末報告.html'>分組 pdf 期末報告</a></li></ul><li><a href='期中報告.html'>期中報告</a></li>
+                     <li><a href='網路連線設定.html'>網路連線設定</a><li><a href='配置可攜程式環境.html'>配置可攜程式環境</a><li><a href='倉儲改版.html'>倉儲改版</a><li><a href='靜態CMSimfly.html'>靜態CMSimfly</a><li><a href='Mobile網站內容.html'>Mobile網站內容</a><li><a href='Virtual Host虛擬主機.html'>Virtual Host虛擬主機</a><li class='has-children'><a href='期中報告.html'>期中報告</a><ul class='dropdown'><li><a href='簡介.html'>簡介</a><li><a href='目錄結構.html'>目錄結構</a><li class='has-children'><a href='頁面編輯.html'>頁面編輯</a><ul class='dropdown'><li><a href='插入程式碼.html'>插入程式碼</a></li></ul><li><a href='網際簡報.html'>網際簡報</a><li><a href='網誌編輯.html'>網誌編輯</a><li><a href='已知錯誤.html'>已知錯誤</a><li><a href='GAME1.html'>GAME1</a><li><a href='期中報告(個人影片).html'>期中報告(個人影片)</a></li></ul><li><a href='國旗.html'>國旗</a></li>
                       </ul>
                 </nav>
               </div>
@@ -147,24 +147,173 @@ init_mathjax();
           </div>
           
         </header>
-    <div id="tipue_search_content">CMSimfly 架構 << <a href='CMSimfly 架構.html'>Previous</a> <a href='套用模板一.html'>Next</a> >> 套用模板一<br /><h1>bs4 應用</h1>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import bs4
-
-filename = "index.html"
-with open(filename, "r", encoding="utf-8") as f:
-    file_content = f.read()
-
-soup = bs4.BeautifulSoup(file_content, "lxml")
-
-new_content = soup.prettify()
-print(new_content)
-
-with open(filename, "w", encoding="utf-8") as f:
-    f.write(new_content)
-
-#print(soup.prettify())
+    <div id="tipue_search_content">已知錯誤 << <a href='已知錯誤.html'>Previous</a> <a href='期中報告(個人影片).html'>Next</a> >> 期中報告(個人影片)<br /><h1>GAME1</h1>
+<p><button onclick="myFunction()">Try it</button></p>
+<p></p>
+<p id="demo"></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">
+<script>// <![CDATA[
+function myFunction() {
+  document.getElementById("demo").innerHTML = Math.floor(Math.random()*10);
+}
+// ]]></script>
 </pre>
-<br />CMSimfly 架構 << <a href='CMSimfly 架構.html'>Previous</a> <a href='套用模板一.html'>Next</a> >> 套用模板一</div>
+<p><canvas height="300" id="canvas" width="400"> Your browser doesn't support the HTML5 element canvas. </canvas> <br/> <button onclick="throwdice();">Throw dice </button></p>
+<form id="f" name="f">Stage: <input name="stage" type="text" value="First Throw"/> Point: <input name="pv" type="text" value="   "/> Outcome: <input name="outcome" type="text" value="     "/></form>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">
+<script type="text/javascript">// <![CDATA[
+var cwidth = 400;
+    var cheight = 300;
+    var dicex = 50;
+    var dicey = 50;
+    var dicewidth = 100;
+    var diceheight = 100;
+    var dotrad = 6;
+    var ctx;
+    var dx;
+    var dy;
+    var firstturn = true;
+    var point;
+function throwdice() {
+    var sum;
+    var ch = 1+Math.floor(Math.random()*6);
+    sum = ch;
+    dx = dicex;
+    dy = dicey;
+    drawface(ch);
+    dx = dicex + 150;
+    ch=1 + Math.floor(Math.random()*6);
+    sum += ch;
+    drawface(ch);
+    if (firstturn) {
+        switch(sum) {
+            case 7:
+            case 11:
+              document.f.outcome.value="You win!";
+              break;
+            case 2:
+            case 3:
+            case 12:
+              document.f.outcome.value="You lose!";
+              break;
+            default:
+              point = sum;
+              document.f.pv.value=point;
+              firstturn = false;
+              document.f.stage.value="Need follow-up throw.";
+              document.f.outcome.value="   ";
+        }
+    }
+    else {
+        switch(sum) {
+        case point:
+           document.f.outcome.value="You win!";
+           document.f.stage.value="Back to first throw.";
+           document.f.pv.value=" ";
+           firstturn = true;
+           break;
+        case 7:
+           document.f.outcome.value="You lose!";
+           document.f.stage.value="Back to first throw.";
+           document.f.pv.value=" ";
+           firstturn = true;
+        }
+            }
+}
+function drawface(n) {
+  ctx = document.getElementById('canvas').getContext('2d');  
+  ctx.lineWidth = 5;
+  ctx.clearRect(dx,dy,dicewidth,diceheight);
+  ctx.strokeRect(dx,dy,dicewidth,diceheight)
+  var dotx;
+  var doty;
+  ctx.fillStyle = "#009966";
+    switch(n) {
+        case 1:
+         draw1();
+         break;
+        case 2:
+         draw2();
+         break;
+        case 3:
+         draw2();
+         draw1();
+         break;
+        case 4:
+         draw4();
+         break;
+        case 5:
+         draw4();
+         draw1();
+         break;
+        case 6:
+         draw4();
+         draw2mid();
+         break;
+         
+    }
+}
+function draw1() {
+    var dotx;
+    var doty;
+    ctx.beginPath();
+    dotx = dx + .5*dicewidth;
+    doty = dy + .5*diceheight;
+    ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+    ctx.closePath();
+    ctx.fill();
+}
+function draw2() {
+    var dotx;
+    var doty;
+    ctx.beginPath();
+    dotx = dx + 3*dotrad;
+    doty = dy + 3*dotrad;
+    ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+    dotx = dx+dicewidth-3*dotrad;
+    doty = dy+diceheight-3*dotrad;
+    ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+    ctx.closePath();
+    ctx.fill();
+}
+function draw4() {
+    var dotx;
+    var doty;
+    ctx.beginPath();
+    dotx = dx + 3*dotrad;
+    doty = dy + 3*dotrad;
+    ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+    dotx = dx+dicewidth-3*dotrad;
+    doty = dy+diceheight-3*dotrad;
+    ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+    ctx.closePath();
+    ctx.fill();
+    ctx.beginPath();
+    dotx = dx + 3*dotrad;
+    doty = dy + diceheight-3*dotrad;  //no change
+    ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+    dotx = dx+dicewidth-3*dotrad;
+    doty = dy+ 3*dotrad;
+    ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+    ctx.closePath();
+    ctx.fill(); 
+}
+function draw2mid() {
+    var dotx;
+    var doty;
+    ctx.beginPath();
+    dotx = dx + 3*dotrad;
+    doty = dy + .5*diceheight;
+    ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+    dotx = dx+dicewidth-3*dotrad;
+    doty = dy + .5*diceheight; //no change
+    ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+    ctx.closePath();
+    ctx.fill();
+}
+// ]]></script>
+</pre>
+<br />已知錯誤 << <a href='已知錯誤.html'>Previous</a> <a href='期中報告(個人影片).html'>Next</a> >> 期中報告(個人影片)</div>
         
     <!-- footer -->
       <div class="container">

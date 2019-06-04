@@ -662,27 +662,25 @@ function draw2mid() {
 <h4>40723110</h4>
 <p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/DTZS_2E6sbA" width="560"></iframe></p>
 <h1>國旗</h1>
-<!-- for Brython -->
+<!-- 導入 Brython 標準程式庫 -->
 <script src="/static/brython.js"></script>
 <script src="/static/brython_stdlib.js"></script>
-<!-- 啟動 brython() -->
-<p>
+<p></p>
+<!-- 啟動 Brython -->
 <script>// <![CDATA[
 window.onload=function(){
-brython(1);
+// 設定 data/py 為共用程式路徑
+brython({debug:1, pythonpath:['./../data/py']});
 }
 // ]]></script>
-</p>
-<!-- 以下利用 Brython 程式執行繪圖 -->
-<p><canvas height="400" id="taiwan_flag" width="600"></canvas></p>
-<p>
-<script type="text/python3">// <![CDATA[
+<p><canvas height="400" id="plotarea" width="600"></canvas></p>
+<script type="text/python">// <![CDATA[
 # 導入 doc
 from browser import document as doc
 import math
-  
+
 # 準備繪圖畫布
-canvas = doc["taiwan_flag"]
+canvas = doc["plotarea"]
 ctx = canvas.getContext("2d")
 # 進行座標轉換, x 軸不變, y 軸反向且移動 canvas.height 單位光點
 # ctx.setTransform(1, 0, 0, -1, 0, canvas.height)
@@ -729,4 +727,3 @@ ctx.closePath()
 ctx.fillStyle = '#fff'
 ctx.fill()
 // ]]></script>
-</p>

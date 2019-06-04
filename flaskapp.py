@@ -1865,6 +1865,8 @@ def savePage():
     """save all pages function"""
     page_content = request.form['page_content']
     # check if administrator
+    page_content = page_content.replace('// <![CDATA[', '')
+    page_content = page_content.replace('// ]]>', '')
     if not isAdmin():
         return redirect("/login")
     if page_content is None:
@@ -2188,6 +2190,8 @@ def ssavePage():
     """seperate save page function"""
     page_content = request.form['page_content']
     page_order = request.form['page_order']
+    page_content = page_content.replace('// <![CDATA[', '')
+    page_content = page_content.replace('// ]]>', '')
     if not isAdmin():
         return redirect("/login")
     if page_content is None:
@@ -2217,12 +2221,15 @@ def ssavePage():
     # 嘗試避免因最後一個標題刪除儲存後產生 internal error 問題
     if original_head_title is None:
         return redirect("/")
-    if original_head_title == head[int(page_order)]:
-        #edit_url = "/get_page/" + urllib.parse.quote_plus(head[int(page_order)]) + "&edit=1"
-        #edit_url = "/get_page/" + urllib.parse.quote_plus(original_head_title) + "/1"
-        edit_url = "/get_page/" + original_head_title + "/1"
-        return redirect(edit_url)
-    else:
+    try:
+        if original_head_title == head[int(page_order)]:
+            #edit_url = "/get_page/" + urllib.parse.quote_plus(head[int(page_order)]) + "&edit=1"
+            #edit_url = "/get_page/" + urllib.parse.quote_plus(original_head_title) + "/1"
+            edit_url = "/get_page/" + original_head_title + "/1"
+            return redirect(edit_url)
+        else:
+            return redirect("/")
+    except:
         return redirect("/")
 
 

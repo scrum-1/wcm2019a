@@ -1,3 +1,4 @@
-# wcm2019a
+# cmsimfly
+CMSimfly is a simple CMS in Flask
 
-http://scrum-1.github.io/wcm2019a
+https://chiamingyen.github.io/cmsimfly
